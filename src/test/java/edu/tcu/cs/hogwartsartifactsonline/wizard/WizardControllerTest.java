@@ -16,6 +16,7 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.http.MediaType;
 import org.springframework.test.web.servlet.MockMvc;
+import org.springframework.test.web.servlet.ResultActions;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -195,4 +196,31 @@ class WizardControllerTest {
                 .andExpect(jsonPath("$.message").value("Could not find wizard with Id 1"))
                 .andExpect(jsonPath("$.data").isEmpty());
     }
+
+    @Test
+    void testAssignArtifactErrorWithNonExistentWizardId() throws Exception {
+        doThrow(new ObjectNotFoundException("wizard", 1))
+                .when(this.wizardService).assignArtifact(1, "1985");
+
+        this.mockMvc.perform(put(this.baseUrl + "/wizards/1/artifacts/1985")
+                .accept(MediaType.APPLICATION_JSON))
+                .andExpect(jsonPath("$.flag").value(false))
+                .andExpect(jsonPath("$.code").value(StatusCode.NOT_FOUND))
+                .andExpect(jsonPath("$.message").value("Could not find wizard with Id 1"))
+                .andExpect(jsonPath("$.data").isEmpty());
+    }
+
+    @Test
+    void testAssignArtifactErrorWithNonExistentArtifactId() throws Exception {
+        doThrow(new ObjectNotFoundException("artifact", "1986"))
+                .when(this.wizardService).assignArtifact(3, "1986");
+
+        this.mockMvc.perform(put(this.baseUrl + "/wizards/3/artifacts/1986")
+                .accept(MediaType.APPLICATION_JSON))
+                .andExpect(jsonPath("$.flag").value(false))
+                .andExpect(jsonPath("$.code").value(StatusCode.NOT_FOUND))
+                .andExpect(jsonPath("$.message").value("Could not find artifact with Id 1986"))
+                .andExpect(jsonPath("$.data").isEmpty());
+    }
+
 }
