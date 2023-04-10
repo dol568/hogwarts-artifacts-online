@@ -2,6 +2,8 @@ package edu.tcu.cs.hogwartsartifactsonline.system;
 
 import edu.tcu.cs.hogwartsartifactsonline.artifact.Artifact;
 import edu.tcu.cs.hogwartsartifactsonline.artifact.ArtifactRepository;
+import edu.tcu.cs.hogwartsartifactsonline.artifact.hogwartsuser.HogwartsUser;
+import edu.tcu.cs.hogwartsartifactsonline.artifact.hogwartsuser.UserRepository;
 import edu.tcu.cs.hogwartsartifactsonline.wizard.Wizard;
 import edu.tcu.cs.hogwartsartifactsonline.wizard.WizardRepository;
 import org.springframework.boot.CommandLineRunner;
@@ -14,9 +16,12 @@ public class DBDataInitializer implements CommandLineRunner {
 
     private final WizardRepository wizardRepository;
 
-    public DBDataInitializer(ArtifactRepository artifactRepository, WizardRepository wizardRepository) {
+    private final UserRepository userRepository;
+
+    public DBDataInitializer(ArtifactRepository artifactRepository, WizardRepository wizardRepository, UserRepository userRepository) {
         this.artifactRepository = artifactRepository;
         this.wizardRepository = wizardRepository;
+        this.userRepository = userRepository;
     }
 
     @Override
@@ -81,5 +86,30 @@ public class DBDataInitializer implements CommandLineRunner {
         wizardRepository.save(wizard3);
 
         artifactRepository.save(artifact6);
+
+        HogwartsUser user1 = new HogwartsUser();
+        user1.setId(1);
+        user1.setUsername("john");
+        user1.setPassword("123456");
+        user1.setEnabled(true);
+        user1.setRoles("admin user");
+
+        HogwartsUser user2 = new HogwartsUser();
+        user2.setId(2);
+        user2.setUsername("eric");
+        user2.setPassword("654321");
+        user2.setEnabled(true);
+        user2.setRoles("user");
+
+        HogwartsUser user3 = new HogwartsUser();
+        user3.setId(3);
+        user3.setUsername("tom");
+        user3.setEnabled(false);
+        user3.setPassword("qwerty");
+        user3.setRoles("user");
+
+        this.userRepository.save(user1);
+        this.userRepository.save(user2);
+        this.userRepository.save(user3);
     }
 }
