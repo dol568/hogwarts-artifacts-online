@@ -1,10 +1,8 @@
 package edu.tcu.cs.hogwartsartifactsonline.hogwartsuser;
 
-import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import edu.tcu.cs.hogwartsartifactsonline.artifact.hogwartsuser.HogwartsUser;
-import edu.tcu.cs.hogwartsartifactsonline.artifact.hogwartsuser.UserService;
-import edu.tcu.cs.hogwartsartifactsonline.artifact.hogwartsuser.dto.UserDto;
+import edu.tcu.cs.hogwartsartifactsonline.hogwartsuser.HogwartsUser;
+import edu.tcu.cs.hogwartsartifactsonline.hogwartsuser.dto.UserDto;
 import edu.tcu.cs.hogwartsartifactsonline.system.StatusCode;
 import edu.tcu.cs.hogwartsartifactsonline.system.exception.ObjectNotFoundException;
 import org.hamcrest.Matchers;
