@@ -2,8 +2,8 @@ package edu.tcu.cs.hogwartsartifactsonline.system;
 
 import edu.tcu.cs.hogwartsartifactsonline.artifact.Artifact;
 import edu.tcu.cs.hogwartsartifactsonline.artifact.ArtifactRepository;
-import edu.tcu.cs.hogwartsartifactsonline.artifact.hogwartsuser.HogwartsUser;
-import edu.tcu.cs.hogwartsartifactsonline.artifact.hogwartsuser.UserRepository;
+import edu.tcu.cs.hogwartsartifactsonline.hogwartsuser.HogwartsUser;
+import edu.tcu.cs.hogwartsartifactsonline.hogwartsuser.UserService;
 import edu.tcu.cs.hogwartsartifactsonline.wizard.Wizard;
 import edu.tcu.cs.hogwartsartifactsonline.wizard.WizardRepository;
 import org.springframework.boot.CommandLineRunner;
@@ -16,12 +16,12 @@ public class DBDataInitializer implements CommandLineRunner {
 
     private final WizardRepository wizardRepository;
 
-    private final UserRepository userRepository;
+    private final UserService userService;
 
-    public DBDataInitializer(ArtifactRepository artifactRepository, WizardRepository wizardRepository, UserRepository userRepository) {
+    public DBDataInitializer(ArtifactRepository artifactRepository, WizardRepository wizardRepository, UserService userService) {
         this.artifactRepository = artifactRepository;
         this.wizardRepository = wizardRepository;
-        this.userRepository = userRepository;
+        this.userService = userService;
     }
 
     @Override
@@ -108,8 +108,8 @@ public class DBDataInitializer implements CommandLineRunner {
         user3.setPassword("qwerty");
         user3.setRoles("user");
 
-        this.userRepository.save(user1);
-        this.userRepository.save(user2);
-        this.userRepository.save(user3);
+        this.userService.save(user1);
+        this.userService.save(user2);
+        this.userService.save(user3);
     }
 }

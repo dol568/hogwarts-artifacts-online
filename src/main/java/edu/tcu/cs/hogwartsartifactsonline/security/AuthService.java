@@ -1,0 +1,39 @@
+package edu.tcu.cs.hogwartsartifactsonline.security;
+
+import edu.tcu.cs.hogwartsartifactsonline.hogwartsuser.HogwartsUser;
+import edu.tcu.cs.hogwartsartifactsonline.hogwartsuser.MyUserPrincipal;
+import edu.tcu.cs.hogwartsartifactsonline.hogwartsuser.converter.UsertoUserDtoConverter;
+import edu.tcu.cs.hogwartsartifactsonline.hogwartsuser.dto.UserDto;
+import org.springframework.security.core.Authentication;
+import org.springframework.stereotype.Service;
+
+import java.util.HashMap;
+import java.util.Map;
+
+@Service
+public class AuthService {
+
+    private final JWTProvider jwtProvider;
+
+    private final UsertoUserDtoConverter usertoUserDtoConverter;
+
+    public AuthService(JWTProvider jwtProvider, UsertoUserDtoConverter usertoUserDtoConverter) {
+        this.jwtProvider = jwtProvider;
+        this.usertoUserDtoConverter = usertoUserDtoConverter;
+    }
+
+    public Map<String, Object> createLoginInfo(Authentication authentication) {
+        MyUserPrincipal principal = (MyUserPrincipal) authentication.getPrincipal();
+        HogwartsUser hogwartsUser = principal.getHogwartsUser();
+        UserDto userDto = this.usertoUserDtoConverter.convert(hogwartsUser);
+
+        String token = this.jwtProvider.createToken(authentication);
+
+        Map<String, Object> loginResultMap = new HashMap<>();
+
+        loginResultMap.put("userInfo", userDto);
+        loginResultMap.put("token", token);
+
+        return loginResultMap;
+    }
+}

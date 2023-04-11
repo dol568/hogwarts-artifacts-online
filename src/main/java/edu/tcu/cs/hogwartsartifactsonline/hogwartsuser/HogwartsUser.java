@@ -1,4 +1,4 @@
-package edu.tcu.cs.hogwartsartifactsonline.artifact.hogwartsuser;
+package edu.tcu.cs.hogwartsartifactsonline.hogwartsuser;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;

@@ -1,4 +1,4 @@
-package edu.tcu.cs.hogwartsartifactsonline.artifact.hogwartsuser.dto;
+package edu.tcu.cs.hogwartsartifactsonline.hogwartsuser.dto;
 
 import jakarta.validation.constraints.NotEmpty;
 

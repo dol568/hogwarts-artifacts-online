@@ -1,8 +1,8 @@
-package edu.tcu.cs.hogwartsartifactsonline.artifact.hogwartsuser;
+package edu.tcu.cs.hogwartsartifactsonline.hogwartsuser;
 
-import edu.tcu.cs.hogwartsartifactsonline.artifact.hogwartsuser.converter.UserDtoToUserConverter;
-import edu.tcu.cs.hogwartsartifactsonline.artifact.hogwartsuser.converter.UsertoUserDtoConverter;
-import edu.tcu.cs.hogwartsartifactsonline.artifact.hogwartsuser.dto.UserDto;
+import edu.tcu.cs.hogwartsartifactsonline.hogwartsuser.converter.UserDtoToUserConverter;
+import edu.tcu.cs.hogwartsartifactsonline.hogwartsuser.converter.UsertoUserDtoConverter;
+import edu.tcu.cs.hogwartsartifactsonline.hogwartsuser.dto.UserDto;
 import edu.tcu.cs.hogwartsartifactsonline.system.Result;
 import edu.tcu.cs.hogwartsartifactsonline.system.StatusCode;
 import jakarta.validation.Valid;
